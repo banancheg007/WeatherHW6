@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, "Wifi connect is available", Toast.LENGTH_SHORT).show()
                 val okHttpHandler = OkHttpHandler()
                 okHttpHandler.execute(url).get()
-               // var wrapper: Wrapper = Wrapper()
+                // var wrapper: Wrapper = Wrapper()
                 //var gson: Gson = Gson()
                 //run("http://api.openweathermap.org/data/2.5/forecast?q=Cherkasy&cnt=7&mode=json&APPID=c68b7ceb6ebeda8d10a140207cc3049a")
             } else if (activeNetwork!!.getType() == ConnectivityManager.TYPE_MOBILE) {
@@ -60,7 +60,7 @@ class MainActivity : AppCompatActivity() {
                 //var wrapper: Wrapper = Wrapper()
                 //var gson: Gson = Gson()
 
-               // wrapper = gson.fromJson(okHttpHandler.responseBody?.charStream(), Wrapper::class.java)
+                // wrapper = gson.fromJson(okHttpHandler.responseBody?.charStream(), Wrapper::class.java)
                 //                //val string = gson.fromJson("\"world\"", String::class.java)
 
                 //println("Май сити: " + wrapper.city.getName().toString())
@@ -100,21 +100,21 @@ class MainActivity : AppCompatActivity() {
                     Toast.makeText(applicationContext, "false", Toast.LENGTH_LONG).show()
 
                 val wrapper:Wrapper = gson.fromJson(response.body()!!.charStream(),Wrapper::class.java)
-                println("Май сити: " + wrapper.city.getName().toString())
-               // println("Date: " + wrapper.list.get(0).dt)
+                //println("Май сити: " + wrapper.city.getName().toString())
+                // println("Date: " + wrapper.list.get(0).dt)
 
                 //val dt = Date(wrapper.list.get(0).dt * 1000)
 
-               // val sfd = SimpleDateFormat("dd-MM-yyyy HH:mm:ss")
+                // val sfd = SimpleDateFormat("dd-MM-yyyy HH:mm:ss")
                 //println("Date2: " + sfd.format(dt))
 
-                for( i  in wrapper.list){
-                    val dt = Date(i.dt * 1000)
-                    val sfd = SimpleDateFormat("dd-MM-yyyy HH:mm:ss")
-                    println("Date: " + sfd.format(dt))
-                }
+                //for( i  in wrapper.list){
+                 //   val dt = Date(i.dt * 1000)
+                 //   val sfd = SimpleDateFormat("dd-MM-yyyy HH:mm:ss")
+                  //  println("Date: " + sfd.format(dt))
+               // }
                 println("Wrapper - " + wrapper.toString())
-                myTextView.setText(wrapper.toString())
+                //myTextView.setText(wrapper.toString())
 
 
                 client.newCall(request).enqueue(object : Callback {

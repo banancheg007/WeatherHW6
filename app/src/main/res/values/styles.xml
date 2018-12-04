@@ -6,6 +6,18 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:buttonStyle">@style/ButtonStyle</item>
+        <item name="android:textViewStyle">@style/TextViewStyle</item>
+        <item name="android:imageButtonStyle">@style/ImageButtonStyle</item>
+    </style>
+
+    <style name="ButtonStyle">
+    </style>
+
+    <style name="TextViewStyle">
+    </style>
+
+    <style name="ImageButtonStyle">
     </style>
 
 </resources>

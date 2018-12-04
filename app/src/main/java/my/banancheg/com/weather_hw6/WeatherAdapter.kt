@@ -14,12 +14,13 @@ import kotlinx.android.synthetic.main.weather_item.view.*
 import my.banancheg.com.weather_hw6.R.id.*
 import my.banancheg.com.weather_hw6.entity.List
 import java.text.SimpleDateFormat
+import my.banancheg.com.weather_hw6.SecondActivity
 import java.util.*
 import android.support.v4.content.ContextCompat.startActivity
 
 
 
- class WeatherAdapter(private val list: MutableList<List>?): RecyclerView.Adapter<WeatherAdapter.WeatherViewHolder>() {
+ class WeatherAdapter(val context: Context,private val list: MutableList<List>?): RecyclerView.Adapter<WeatherAdapter.WeatherViewHolder>() {
 
 
 
@@ -49,16 +50,25 @@ import android.support.v4.content.ContextCompat.startActivity
         val icon = currentItemList.weather!![0].icon
         val iconUrl = "http://openweathermap.org/img/w/$icon.png"
         Picasso.get().load(iconUrl).into(weatherViewHolder.itemView.iconImageView)
-        weatherViewHolder.itemView.setOnClickListener {
+        //weatherViewHolder.itemView.setOnClickListener {
           // val intent: Intent = Intent(context, SecondActivity::class.java)
             //intent.putExtra("current item", currentItemList)
             //startActivity(context)
 
-        }
+        //}
     }
 
-    inner class WeatherViewHolder(view: View) : RecyclerView.ViewHolder(view)
+    inner class WeatherViewHolder(view: View) : RecyclerView.ViewHolder(view), View.OnClickListener {
 
+        init {
+            view.setOnClickListener(this)
+        }
+
+        override fun onClick(view: View) {
+            val intent = Intent(context, SecondActivity::class.java)
+            context.startActivity(intent)
+        }
+    }
     /**
      * Return the formatted date string (i.e. "Mar 3, 1984") from a Date object.
      */

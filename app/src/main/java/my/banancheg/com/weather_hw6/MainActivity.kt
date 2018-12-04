@@ -14,6 +14,7 @@ import android.graphics.BitmapFactory
 import android.graphics.Bitmap
 import okhttp3.OkHttpClient
 import android.os.AsyncTask
+import android.support.v7.widget.LinearLayoutManager
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_main.*
 import my.banancheg.com.weather_hw6.entity.*
@@ -32,9 +33,9 @@ import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
-    var url: String = "http://api.openweathermap.org/data/2.5/forecast?q=Cherkasy&mode=json&APPID=c68b7ceb6ebeda8d10a140207cc3049a"
+    var url: String = "http://api.openweathermap.org/data/2.5/forecast?q=Cherkasy&mode=json&cnt=9&units=metric&APPID=c68b7ceb6ebeda8d10a140207cc3049a"
 
-    private val client = OkHttpClient()
+    private val client = OkHttpHandler()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -82,8 +83,8 @@ class MainActivity : AppCompatActivity() {
             override fun onResponse(call: Call, response: Response) = println(response.body()?.string())
         })
     }*/
-    inner class OkHttpHandler : AsyncTask<String, Void, ByteArray>() {
-
+    inner class OkHttpHandler() : AsyncTask<String, Void, ByteArray>() {
+        lateinit var wrapper: Wrapper
         internal var client = OkHttpClient()
         private val gson = Gson()
         var jsnString: String? = null
@@ -99,7 +100,7 @@ class MainActivity : AppCompatActivity() {
                 if (!response.isSuccessful)
                     Toast.makeText(applicationContext, "false", Toast.LENGTH_LONG).show()
 
-                val wrapper:Wrapper = gson.fromJson(response.body()!!.charStream(),Wrapper::class.java)
+                 wrapper = gson.fromJson(response.body()!!.charStream(),Wrapper::class.java)
                 //println("Май сити: " + wrapper.city.getName().toString())
                 // println("Date: " + wrapper.list.get(0).dt)
 
@@ -108,13 +109,13 @@ class MainActivity : AppCompatActivity() {
                 // val sfd = SimpleDateFormat("dd-MM-yyyy HH:mm:ss")
                 //println("Date2: " + sfd.format(dt))
 
-                //for( i  in wrapper.list){
-                 //   val dt = Date(i.dt * 1000)
-                 //   val sfd = SimpleDateFormat("dd-MM-yyyy HH:mm:ss")
-                  //  println("Date: " + sfd.format(dt))
-               // }
+                /*for( i  in wrapper.list){
+                    val dt = Date(i.dt * 1000)
+                    val sfd = SimpleDateFormat("dd-MM-yyyy HH:mm:ss")
+                    println("Date: " + sfd.format(dt))
+                }*/
                 println("Wrapper - " + wrapper.toString())
-                //myTextView.setText(wrapper.toString())
+               // myTextView.setText(wrapper.toString())
 
 
                 client.newCall(request).enqueue(object : Callback {
@@ -132,7 +133,12 @@ class MainActivity : AppCompatActivity() {
 
             return null
         }
-
+        override fun onPostExecute(result: ByteArray?) {
+            super.onPostExecute(result)
+            val adapter = WeatherAdapter(this@MainActivity, wrapper.list)
+            recyclerView.layoutManager = LinearLayoutManager(this@MainActivity)
+            recyclerView.adapter = adapter
+        }
 
 
     }

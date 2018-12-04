@@ -30,7 +30,7 @@ class Main : Serializable {
     var humidity: Long = 0
     @SerializedName("temp_kf")
     @Expose
-    var tempKf: Long = 0
+    var tempKf: Double = 0.00
 
     override fun toString(): String {
         return ToStringBuilder(this).append("temp", temp).append("tempMin", tempMin).append("tempMax", tempMax)

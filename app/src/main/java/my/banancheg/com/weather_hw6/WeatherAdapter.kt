@@ -17,12 +17,10 @@ import java.text.SimpleDateFormat
 import my.banancheg.com.weather_hw6.SecondActivity
 import java.util.*
 import android.support.v4.content.ContextCompat.startActivity
+import my.banancheg.com.weather_hw6.entity.Transfer
 
 
-
- class WeatherAdapter(val context: Context,private val list: MutableList<List>?): RecyclerView.Adapter<WeatherAdapter.WeatherViewHolder>() {
-
-
+class WeatherAdapter(val context: Context,private val list: MutableList<List>?): RecyclerView.Adapter<WeatherAdapter.WeatherViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, position: Int): WeatherViewHolder {
@@ -39,7 +37,8 @@ import android.support.v4.content.ContextCompat.startActivity
         println("Position" + position)
         print("List - "+ list!![position])
         val currentItemList = list!![position]
-        //val icon = currentItemList.weather!![0].icon
+
+                //val icon = currentItemList.weather!![0].icon
         //val iconUrl = "http://openweathermap.org/img/w/$icon.png"
         //Picasso.get().load(iconUrl).into(iconImageView)
 
@@ -50,23 +49,47 @@ import android.support.v4.content.ContextCompat.startActivity
         val icon = currentItemList.weather!![0].icon
         val iconUrl = "http://openweathermap.org/img/w/$icon.png"
         Picasso.get().load(iconUrl).into(weatherViewHolder.itemView.iconImageView)
+
         //weatherViewHolder.itemView.setOnClickListener {
           // val intent: Intent = Intent(context, SecondActivity::class.java)
             //intent.putExtra("current item", currentItemList)
             //startActivity(context)
 
         //}
+
     }
 
     inner class WeatherViewHolder(view: View) : RecyclerView.ViewHolder(view), View.OnClickListener {
+       var transfer: Transfer = Transfer()
 
         init {
             view.setOnClickListener(this)
+
         }
 
         override fun onClick(view: View) {
             val intent = Intent(context, SecondActivity::class.java)
+           intent.putExtra("list", list!![adapterPosition])
+            //transfer!!.icon =list!![adapterPosition].weather!![0].icon
+            //transfer!!.description = list!![adapterPosition].weather!![0].description
+            //transfer!!.temp = list!![adapterPosition].main!!.temp
+            //transfer!!.humidity = list!![adapterPosition].main!!.humidity
+            //transfer!!.speedWind = list!![adapterPosition].wind!!.speed
+            //transfer!!.pressure = list!![adapterPosition].main!!.pressure
+            //transfer!!.clouds = list!![adapterPosition].clouds!!.all
+           // intent.putExtra("transfer", transfer)
             context.startActivity(intent)
+        }
+
+        fun onBind(list: List){
+            println("СТАРТУЕМ"+list.weather!![0].icon)
+            transfer.icon = list.weather!![0].icon
+            transfer.description = list.weather!![0].description
+            transfer.temp = list.main!!.temp
+            transfer.humidity = list.main!!.humidity
+            transfer.speedWind = list.wind!!.speed
+            transfer.pressure = list.main!!.pressure
+            transfer.clouds = list.clouds!!.all
         }
     }
     /**
@@ -86,6 +109,17 @@ import android.support.v4.content.ContextCompat.startActivity
         val sfd = SimpleDateFormat("h:mm a")
         return sfd.format(dt)
     }
+
+   /* fun onBind(list: List , transfer:Transfer?){
+        transfer!!.icon =list.weather!![0].icon
+        transfer!!.description = list.weather!![0].description
+        transfer!!.temp = list.main!!.temp
+        transfer!!.humidity = list.main!!.humidity
+        transfer!!.speedWind = list.wind!!.speed
+        transfer!!.pressure = list.main!!.pressure
+        transfer!!.clouds = list.clouds!!.all
+    }*/
+
 
 
 }

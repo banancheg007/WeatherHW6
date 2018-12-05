@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="temperature_list">
+        <item>in kelvins</item>
+        <item>in celsius</item>
+    </string-array>
+</resources>

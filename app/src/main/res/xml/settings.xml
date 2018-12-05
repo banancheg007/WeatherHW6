@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <ListPreference
+     android:entries="@array/temperature_list"
+     android:entryValues="@array/temperature_list"
+     android:key="pref_temperature_format"
+     android:title="@string/choose_temperature"
+     android:summary="@string/choose_temperature_description"
+     android:persistent="true"
+     android:defaultValue="in celsius" />
+</PreferenceScreen>

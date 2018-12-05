@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import android.content.Context.CONNECTIVITY_SERVICE
+import android.content.SharedPreferences
 import android.support.v4.content.ContextCompat.getSystemService
 import android.widget.Toast
 import okhttp3.*
@@ -14,10 +15,12 @@ import android.graphics.BitmapFactory
 import android.graphics.Bitmap
 import okhttp3.OkHttpClient
 import android.os.AsyncTask
+import android.preference.PreferenceManager
 import android.support.v7.widget.LinearLayoutManager
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_main.*
 import my.banancheg.com.weather_hw6.entity.*
+import java.lang.StringBuilder
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -33,14 +36,27 @@ import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
-    var url: String = "http://api.openweathermap.org/data/2.5/forecast?q=Cherkasy&mode=json&cnt=40&units=metric&APPID=c68b7ceb6ebeda8d10a140207cc3049a"
+    var url2: String = "http://api.openweathermap.org/data/2.5/forecast?q=Cherkasy&mode=json&cnt=40&units=metric&APPID=c68b7ceb6ebeda8d10a140207cc3049a"
+    //var url: String = "http://api.openweathermap.org/data/2.5/forecast?q=Cherkasy&mode=json&cnt=40&units=metric&APPID=c68b7ceb6ebeda8d10a140207cc3049a"
+    var url: String = "http://api.openweathermap.org/data/2.5/forecast?q=Cherkasy&mode=json&cnt=40"
+    var key: String = "&APPID=c68b7ceb6ebeda8d10a140207cc3049a"
+    var temperature_in_celsium: String = "&units=metric"
+    lateinit private var sharedPreferences: SharedPreferences
+    private var pref_temperature = "pref_temperature_format"
+    private var temperatureFormat: String? = null
 
     private val client = OkHttpHandler()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        client.execute(url).get()
+
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+        var stringBuilder =StringBuilder(url)
+        stringBuilder.append(temperature_in_celsium)
+        stringBuilder.append(key)
+        println("StringBuilder - " + stringBuilder)
+        client.execute(stringBuilder.toString()).get()
         /*val connManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val activeNetwork = connManager.getActiveNetworkInfo()
         if (activeNetwork != null) {

@@ -53,7 +53,12 @@ class MainActivity : AppCompatActivity() {
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
         var stringBuilder =StringBuilder(url)
-        stringBuilder.append(temperature_in_celsium)
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+        temperatureFormat =  sharedPreferences.getString(pref_temperature, "in celsius")
+        println("StringBuilder - " + stringBuilder)
+        if(temperatureFormat.equals("in celsius")){
+            stringBuilder.append(temperature_in_celsium)
+        }
         stringBuilder.append(key)
         println("StringBuilder - " + stringBuilder)
         client.execute(stringBuilder.toString()).get()

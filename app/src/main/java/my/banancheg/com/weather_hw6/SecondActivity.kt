@@ -14,13 +14,15 @@ class SecondActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_second)
+        //supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         //val wrapper: Wrapper = intent.getSerializableExtra("wrapper") as Wrapper
        // myTextView2.setText(wrapper.toString())
        val list: List = intent.getSerializableExtra("list") as List
 
        val icon = list.weather!![0].icon
        val iconUrl = "http://openweathermap.org/img/w/$icon.png"
-        Picasso.get().load(iconUrl).into(second_activity_icon)
+        Picasso.get().load(iconUrl).resize(50, 50)
+            .centerCrop().into(second_activity_icon)
 
         second_activity_description.setText(list.weather!![0].description)
         second_activity_temp.setText(list.main!!.temp.toString())

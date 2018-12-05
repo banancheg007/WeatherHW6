@@ -40,8 +40,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        val connManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        client.execute(url).get()
+        /*val connManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val activeNetwork = connManager.getActiveNetworkInfo()
         if (activeNetwork != null) {
             // connected to the internet
@@ -71,9 +71,9 @@ class MainActivity : AppCompatActivity() {
         } else {
             finish()
         }
-    }
+    }*/
 
-    /*fun run(url: String) {
+        /*fun run(url: String) {
         val request = Request.Builder()
             .url(url)
             .build()
@@ -83,6 +83,7 @@ class MainActivity : AppCompatActivity() {
             override fun onResponse(call: Call, response: Response) = println(response.body()?.string())
         })
     }*/
+    }
     inner class OkHttpHandler() : AsyncTask<String, Void, ByteArray>() {
         lateinit var wrapper: Wrapper
         internal var client = OkHttpClient()

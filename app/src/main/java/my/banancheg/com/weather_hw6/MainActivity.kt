@@ -33,7 +33,7 @@ import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
-    var url: String = "http://api.openweathermap.org/data/2.5/forecast?q=Cherkasy&mode=json&cnt=9&units=metric&APPID=c68b7ceb6ebeda8d10a140207cc3049a"
+    var url: String = "http://api.openweathermap.org/data/2.5/forecast?q=Cherkasy&mode=json&cnt=40&units=metric&APPID=c68b7ceb6ebeda8d10a140207cc3049a"
 
     private val client = OkHttpHandler()
 

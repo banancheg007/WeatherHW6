@@ -25,8 +25,7 @@
                 android:parentActivityName=".MainActivity">
         </activity>
         <activity
-                android:name=".ThirdActivity"
-                android:parentActivityName=".SecondActivity">
+                android:name=".ThirdActivity">
         </activity>
         <activity android:name=".MainActivity">
         </activity>

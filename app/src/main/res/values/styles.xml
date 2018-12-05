@@ -8,16 +8,17 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:buttonStyle">@style/ButtonStyle</item>
         <item name="android:textViewStyle">@style/TextViewStyle</item>
-        <item name="android:imageButtonStyle">@style/ImageButtonStyle</item>
     </style>
 
-    <style name="ButtonStyle">
+    <style name="ButtonStyle" parent="Widget.AppCompat.Button.Colored">
+
     </style>
 
-    <style name="TextViewStyle">
+    <style name="TextViewStyle" parent="Widget.AppCompat.TextView.SpinnerItem">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:layout_margin">20dp</item>
     </style>
 
-    <style name="ImageButtonStyle">
-    </style>
+
 
 </resources>

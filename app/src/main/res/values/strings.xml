@@ -1,5 +1,3 @@
 <resources>
     <string name="app_name">Weather-HW6</string>
-    <string name="choose_temperature">Choose temperature</string>
-    <string name="choose_temperature_description">in what units do you want</string>
 </resources>

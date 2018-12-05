@@ -14,15 +14,12 @@ import android.widget.Toast
 
 class SplashActivity : AppCompatActivity() {
 
-    private var textView: TextView? = null
     private var imageView: ImageView? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
-        textView = findViewById(R.id.textView) as TextView
         imageView = findViewById(R.id.imageView) as ImageView
         val myanim = AnimationUtils.loadAnimation(this, R.anim.my_scale)
-        textView!!.startAnimation(myanim)
         imageView!!.startAnimation(myanim)
         val intent = Intent(this, MainActivity::class.java)
         val timer = object : Thread() {
@@ -45,18 +42,14 @@ class SplashActivity : AppCompatActivity() {
         val activeNetwork = connManager.getActiveNetworkInfo()
         val wifiManager = getApplicationContext().getSystemService(Context.WIFI_SERVICE) as WifiManager
         return if (wifiManager.connectionInfo.networkId != -1) {
-            //Log.e("wifiManager()", "Connected")
-            //startActivity(intent)
 
         }else if (activeNetwork?.getType() == ConnectivityManager.TYPE_MOBILE) {
-            // connected to mobile data
             Toast.makeText(this, "Mobile internet is available", Toast.LENGTH_SHORT).show()
-            //startActivity(intent)
         }
 
         else {
             Toast.makeText(applicationContext, "No WiFi Connection", Toast.LENGTH_SHORT).show()
-            //finish()
+            finish()
         }
 
     }
